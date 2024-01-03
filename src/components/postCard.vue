@@ -50,7 +50,7 @@
     openPerfil() {
   console.log('Abrindo perfil para:', this.dadosPost.userName);
   this.$router.push({
-    path: `/perfil/${this.dadosPost.email}/${this.dadosPost.userName}`,
+    path: `/perfil/${this.dadosPost.email}`,
   });
 },
 

@@ -9,10 +9,12 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
     { path: '/', component: () => import('../pages/HomePage.vue'),  meta: {requiresAuth: true, } },
-    { path: '/perfil/:email/:username', component: () => import('../pages/PerfilPage.vue'),  meta: {requiresAuth: true, }},
+    { path: '/perfil/:email', component: () => import('../pages/PerfilPage.vue'),  meta: {requiresAuth: true, }},
     { path: '/Config', component: () => import('../pages/ConfigPage.vue'),   meta: {requiresAuth: true, }},
     { path: '/login', component: () => import('../pages/LoginPage.vue'),  meta: {requiresAuth: false, }},
     { path: '/cadastro', component: () => import('../pages/CadastroPage.vue'),  meta: {requiresAuth: true, }},
+    { path: '/usuarios', component: () => import('../pages/allUsers.vue'),  meta: {requiresAuth: true, }},
+
     { path: '*',component: () => import('../pages/NotFoundPage.vue')  },
 
 

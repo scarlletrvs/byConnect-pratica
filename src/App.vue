@@ -13,7 +13,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link to ="/perfil">
+          <v-list-item :to="`/perfil/${$store.state.userProfile}`">
             <v-icon>mdi-account</v-icon>
             <v-list-item-content>
               <v-list-item-title>Perfil</v-list-item-title>
@@ -24,6 +24,13 @@
             <v-icon>mdi-cog</v-icon>
             <v-list-item-content>
               <v-list-item-title>Configurações</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link to ="/usuarios">
+            <v-icon>mdi-account-multiple</v-icon>
+            <v-list-item-content>
+              <v-list-item-title>Usuários</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -47,8 +54,9 @@
 </template>
 
 <script>
-import  {mapActions} from "vuex";
+import { mapActions} from "vuex";
 import router from "./routers/router";
+import { auth } from "./configuracao";
 
 
 export default {
@@ -61,11 +69,12 @@ export default {
     shouldShowDrawer() {
       return !['/login', '/cadastro'].includes(this.$route.path);
     },
+   
+  
   },
   methods: {
-    ...mapActions([
-      "logout"
-    ]),
+    ...mapActions(["logout"]),
+
     singOut(){
      this.logout()
      router.go(0);   
@@ -83,7 +92,17 @@ export default {
         this.drawer = false;
       }
     },
+  
   },
+  async created() {
+    
+    await this.$store.dispatch('fetchUser')
+    await this.$store.dispatch('fetchUserprofile', auth.currentUser.email)
+  
+
+
+
+},
  
 }
 </script>
